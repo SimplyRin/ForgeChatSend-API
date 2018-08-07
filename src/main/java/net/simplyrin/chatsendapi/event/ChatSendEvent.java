@@ -28,13 +28,26 @@ import net.minecraftforge.fml.common.eventhandler.Event;
 public class ChatSendEvent extends Event {
 
 	private String message;
+	private boolean isCanceled;
 
 	public ChatSendEvent(String message) {
 		this.message = message;
 	}
 
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public String getMessage() {
 		return this.message;
+	}
+
+	public void setCanceled(boolean cancelled) {
+		this.isCanceled = cancelled;
+	}
+
+	public boolean isCanceled() {
+		return this.isCanceled;
 	}
 
 	public boolean isCommand() {

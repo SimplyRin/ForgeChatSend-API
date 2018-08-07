@@ -81,11 +81,10 @@ public class McGuiChat extends GuiChat {
 			} catch (Exception e) {
 				Reflect.on(this).set("playerNamesFound", false);
 			}
-
 		}
 
 		if(keyCode == 1) {
-			this.mc.displayGuiScreen((GuiScreen)null);
+			this.mc.displayGuiScreen((GuiScreen) null);
 		}
 		else if(keyCode != 28 && keyCode != 156) {
 			if(keyCode == 200) {
@@ -108,10 +107,12 @@ public class McGuiChat extends GuiChat {
 			if(s.length() > 0) {
 				ChatSendEvent chatSendEvent = new ChatSendEvent(s);
 				MinecraftForge.EVENT_BUS.post(chatSendEvent);
-				this.sendChatMessage(s);
+				if(!chatSendEvent.isCanceled()) {
+					this.sendChatMessage(chatSendEvent.getMessage());
+				}
 			}
 
-			this.mc.displayGuiScreen((GuiScreen)null);
+			this.mc.displayGuiScreen((GuiScreen) null);
 		}
 	}
 

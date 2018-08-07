@@ -10,7 +10,6 @@ import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.simplyrin.chatsendapi.event.ChatSendEvent;
 import net.simplyrin.chatsendapi.gui.McGuiChat;
 
 /**
@@ -61,11 +60,6 @@ public class Main {
 
 			Minecraft.getMinecraft().displayGuiScreen(new McGuiChat(defaultInputFieldText));
 		}
-	}
-
-	@SubscribeEvent
-	public void onChatSend(ChatSendEvent event) {
-		System.out.println("onChatSend: " + event.getMessage());
 	}
 
 }
