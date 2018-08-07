@@ -8,8 +8,10 @@ Forge でクライアントが送信したチャットメッセージをイベ�
 ```Java
 	@SubscribeEvent
 	public void onChatSend(ChatSendEvent event) {
-		// event.isCommand(); -> イベントがコマンドか(/から始まっている)か
-		// event.getMessage(); -> 送信したメッセージを取得
+		// event.isCommand(); -> メッセージがコマンドか(/から始まっている)かどうか
+		
+		// event.setMessage(String); -> 送信するメッセージを再指定
+		// event.getMessage(); -> 送信するメッセージを取得
 		
 		// event.setCanceled(boolean); -> 受け取ったイベントをキャンセルする
 		// event.isCanceled(); -> イベントがキャンセルされたかどうか
