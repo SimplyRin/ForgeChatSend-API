@@ -2,7 +2,7 @@
 Forge でクライアントが送信したチャットメッセージをイベントで取得する物
 
 # Event Usage
-[ForgeChatSend-API.1.1.jar](https://github.com/SimplyRin/ForgeChatSend-API/releases/download/1.1/ForgeChatSend-API-1.1.jar) を [Release](https://github.com/SimplyRin/ForgeChatSend-API/releases) よりダウンロードして Gradle などでインポートしてください。
+[ForgeChatSend-API.1.2.jar](https://github.com/SimplyRin/ForgeChatSend-API/releases/download/1.2/ForgeChatSend-API-1.2.jar) を [Release](https://github.com/SimplyRin/ForgeChatSend-API/releases) よりダウンロードして Gradle などでインポートしてください。
 
 `mods` フォルダにもこのファイルを入れる必要があります。
 ```Java
@@ -10,8 +10,20 @@ Forge でクライアントが送信したチャットメッセージをイベ�
 	public void onChatSend(ChatSendEvent event) {
 		// event.isCommand(); -> イベントがコマンドか(/から始まっている)か
 		// event.getMessage(); -> 送信したメッセージを取得
-    
-		System.out.println("onChatSend: " + event.getMessage());
+		
+		// event.setCanceled(boolean); -> 受け取ったイベントをキャンセルする
+		// event.isCanceled(); -> イベントがキャンセルされたかどうか
+
+		// 1.2 からクライアントコマンドを作ることができます。
+
+		String[] args = event.getMessage().split(" ");
+		
+		if(args.length > 0) {
+			if(args[0].equalsIgnoreCase("/hello")) {
+				event.setCanceled(true);
+				this.sendMessage("Hello!");
+			}
+		}
 	}
 ```
 
