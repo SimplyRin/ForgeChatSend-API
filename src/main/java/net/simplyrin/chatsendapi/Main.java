@@ -35,7 +35,7 @@ import net.simplyrin.chatsendapi.gui.McGuiChat;
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-@Mod(modid = "ForgeChatSend-API", version = "1.0")
+@Mod(modid = "ForgeChatSend-API", version = "1.2")
 public class Main {
 
 	@Mod.EventHandler
