@@ -1,5 +1,7 @@
 package net.simplyrin.chatsendapi;
 
+import org.joor.Reflect;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraftforge.client.event.GuiScreenEvent;
@@ -48,7 +50,16 @@ public class Main {
 			if(FMLClientHandler.instance().isGUIOpen(McGuiChat.class)) {
 				return;
 			}
-			Minecraft.getMinecraft().displayGuiScreen(new McGuiChat());
+			GuiChat guiChat = (GuiChat) Minecraft.getMinecraft().currentScreen;
+
+			String defaultInputFieldText = "";
+			try {
+				defaultInputFieldText = Reflect.on(guiChat).field("field_146409_v").get();
+			} catch (Exception e) {
+				defaultInputFieldText = Reflect.on(guiChat).field("defaultInputFieldText").get();
+			}
+
+			Minecraft.getMinecraft().displayGuiScreen(new McGuiChat(defaultInputFieldText));
 		}
 	}
 

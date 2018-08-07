@@ -3,9 +3,11 @@ package net.simplyrin.chatsendapi.gui;
 import java.io.IOException;
 
 import org.joor.Reflect;
+import org.lwjgl.input.Keyboard;
 
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraftforge.common.MinecraftForge;
 import net.simplyrin.chatsendapi.event.ChatSendEvent;
 
@@ -33,6 +35,35 @@ import net.simplyrin.chatsendapi.event.ChatSendEvent;
  * SOFTWARE.
  */
 public class McGuiChat extends GuiChat {
+
+	private String defaultInputFieldText;
+
+	public McGuiChat(String defaultInputFieldText) {
+		this.defaultInputFieldText = defaultInputFieldText;
+		try {
+			Reflect.on(this).set("field_146409_v", defaultInputFieldText);
+		} catch (Exception e) {
+			Reflect.on(this).set("defaultInputFieldText", defaultInputFieldText);
+		}
+	}
+
+	@Override
+	public void initGui() {
+		Keyboard.enableRepeatEvents(true);
+
+		try {
+			Reflect.on(this).set("field_146416_h", this.mc.ingameGUI.getChatGUI().getSentMessages().size());
+		} catch (Exception e) {
+			Reflect.on(this).set("sentHistoryCursor", this.mc.ingameGUI.getChatGUI().getSentMessages().size());
+		}
+
+		this.inputField = new GuiTextField(0, this.fontRendererObj, 4, this.height - 12, this.width - 4, 12);
+		this.inputField.setMaxStringLength(100);
+		this.inputField.setEnableBackgroundDrawing(false);
+		this.inputField.setFocused(true);
+		this.inputField.setText(this.defaultInputFieldText);
+		this.inputField.setCanLoseFocus(false);
+	}
 
 	@Override
 	public void keyTyped(char typedChar, int keyCode) throws IOException {
