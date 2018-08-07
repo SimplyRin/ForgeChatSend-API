@@ -1,11 +1,13 @@
 # ForgeChatSend-API
 Forge でクライアントが送信したチャットメッセージをイベントで取得する物
 
-# Event Usage
+# Usage
 [ForgeChatSend-API.1.2.jar](https://github.com/SimplyRin/ForgeChatSend-API/releases/download/1.2/ForgeChatSend-API-1.2.jar) を [Release](https://github.com/SimplyRin/ForgeChatSend-API/releases) よりダウンロードして Gradle などでインポートしてください。
 
 `mods` フォルダにもこのファイルを入れる必要があります。
 ```Java
+	import net.simplyrin.chatsendapi.event.ChatSendEvent;
+	
 	@SubscribeEvent
 	public void onChatSend(ChatSendEvent event) {
 		// event.isCommand(); -> メッセージがコマンドか(/から始まっている)かどうか
